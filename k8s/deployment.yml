@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-service
+  labels:
+    app: file-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: file-service
+  template:
+    metadata:
+      labels:
+        app: file-service
+    spec:
+      containers:
+        - name: file-service
+          image: bookshop-file-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9008
+          env:
+            - name: BPL_JVM_THREAD_COUNT
+              value: '10'
+          volumeMounts:
+            - name: file-config-volume
+              mountPath: /workspace/config
+          lifecycle:
+            preStop:
+              exec:
+                command: [ 'sh', '-c', 'sleep 5' ]
+      volumes:
+        - name: file-config-volume
+          configMap:
+            name: file-config

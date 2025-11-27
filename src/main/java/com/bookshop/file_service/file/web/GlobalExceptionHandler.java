@@ -19,10 +19,15 @@ import java.util.Set;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+
+
     @ExceptionHandler(FileNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Mono<String> handleFileNotFoundException(FileNotFoundException ex) {
-        return Mono.just(ex.getMessage());
+    public Mono<ErrorResponse> handleFileNotFoundException(FileNotFoundException ex) {
+        var response = ErrorResponse.builder()
+                .message(ex.getMessage())
+                .build();
+        return Mono.just(response);
     }
 
     @ExceptionHandler(DuplicateFileException.class)

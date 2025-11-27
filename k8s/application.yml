@@ -1,5 +1,7 @@
 spring:
-  datasource:
+  r2dbc:
+    url: r2dbc:postgresql://bookshop-postgres/bookshopdb_file
+  flyway:
     url: jdbc:postgresql://bookshop-postgres/bookshopdb_file
   security:
     oauth2:
@@ -8,4 +10,4 @@ spring:
           issuer-uri: http://bookshop-keycloak/realms/PolarBookshop
 
 file:
-  upload-dir: /home/uploads
+  upload-dir: /app/uploads

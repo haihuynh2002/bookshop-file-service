@@ -129,7 +129,7 @@ public class LocalStorageService implements FileService {
         return fileRepository.findByOwnerIdAndType(ownerId, type)
                 .flatMap(file -> delete(file.getFilename()))
                 .then()
-                .doOnSuccess(v -> log.info("All files deleted for book ID: {}", ownerId));
+                .doOnSuccess(v -> log.info("All files deleted for owner ID: {}", ownerId));
     }
 
     @Override

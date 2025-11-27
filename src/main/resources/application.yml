@@ -24,4 +24,4 @@ spring:
     url: jdbc:postgresql://localhost:5432/bookshopdb_file
 
 file:
-  upload-dir: ./build/uploads
+  upload-dir: /home/haiht/Desktop/uploads

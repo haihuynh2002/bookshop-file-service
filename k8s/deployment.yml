@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: file-service
-          image: bookshop-file-service
+          image: file-service
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9008
@@ -26,6 +26,8 @@ spec:
           volumeMounts:
             - name: file-config-volume
               mountPath: /workspace/config
+            - name: uploads-volume
+              mountPath: /app/uploads
           lifecycle:
             preStop:
               exec:
@@ -34,3 +36,5 @@ spec:
         - name: file-config-volume
           configMap:
             name: file-config
+        - name: uploads-volume
+          emptyDir: { }
